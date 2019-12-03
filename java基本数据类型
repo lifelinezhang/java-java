@@ -1,0 +1,42 @@
+1、一个char能不能存储一个汉字？
+java内部使用的是不带任何编码格式的unicode字符集，直接使用字符在unicode字符集中的编号。
+注意：没有任何特定的编码，直接使用其在字符集中的编号，这是唯一且统一的办法。
+这里的java内部指的是jvm中，内存中，代码声明的每一个char和string中。
+https://dxyoo7.github.io/2017/03/12/java_5_transform_charset/
+char是两个字节，所以可以存表示unicode字符集中编号在0-65535之间的汉字。
+https://www.itcodemonkey.com/article/5474.html
+对于超过这个编号的字符，char就不能存储了，此时可以用string存储，因为String底层
+使用的是char，所以如果存储了一个编号超过65535的字符，string的length方法就会是2。
+public class Test {
+	public static void main(String[] args) {
+		char[] chars = Character.toChars(0x1f121);
+		String s = new String(chars);
+		System.out.println(s.length());
+		System.out.println(s.codePointCount(0, 2));
+		System.out.println(s.codePointAt(0));
+		System.out.println(s);
+	}
+}
+
+
+
+char跟其他类型的相互转换：
+虽然char是用来存储字符的，但其实t存储的是数字，这个数字是该字符在unicode中的编号。
+所以可以直接给char赋值数字，char和其他类型可以直接在数字层面进行强制类型转换。
+		int b = (int)'a';
+		System.out.println(b);
+		char d = (char)65;
+		System.out.println(d);
+		
+		
+2、int的值的范围[-2147483648,2147483647]。
+
+
+
+
+
+
+
+
+
+
