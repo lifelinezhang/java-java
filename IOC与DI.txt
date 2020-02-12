@@ -1,0 +1,20 @@
+1、依赖注入与控制反转：
+
+控制反转就是说，当类里面要调用其他类的实例的时候，
+尽量不要直接new对象，要采用注入的方式将对象的实例传递进来。
+这样做的好处是，
+1、集中管理所有的Bean
+2、自动解析被注入对象的依赖，避免自己在使用的时候一个一个先向被注入对象注入其
+所需要的的依赖。如下代码：
+UserDAO dao = new UserDAO("mysql");
+        
+UserService service = new UserService(dao);
+        
+Controller controller = new Controller(service);
+
+控制反转是一种思想，实现其的方式包括依赖注入和依赖查找
+
+
+2、面向接口编程
+也就是说当调用其他依赖类的时候，不要写具体的依赖类，要写其对应的接口，
+就比如dao、service层。
